@@ -1,23 +1,37 @@
-document.getElementById('boton1').onclick = function calcularCostoTotal() {
-    const cantidadDeProductos = parseInt(
-        prompt("Ingrese la cantidad de productos:")
-    );
+
+const producto = {
+    cantidad: 0,
+    precios: [],
+};
+
+
+function calcularCostoTotal() {
+    // Obtener la cantidad de productos
+    producto.cantidad = parseInt(prompt("Ingrese la cantidad de productos:"));
 
     let costoTotal = 0;
-    //FOR:
-    for (let i = 1; i <= cantidadDeProductos; i++) {
-        const precioProducto = parseFloat(
-            prompt(`Ingrese el precio del producto ${i}:`)
-        );
-        //IF-ELSE:
+
+    // array precios
+    for (let i = 1; i <= producto.cantidad; i++) {
+        const precioProducto = parseFloat(prompt(`Ingrese el precio del producto ${i}:`));
+
+       
         if (!isNaN(precioProducto) && precioProducto > 0) {
+            producto.precios.push(precioProducto);
             costoTotal += precioProducto;
         } else {
-            alert("precio inválido. Inténtelo nuevamente.");
+            alert("Precio inválido. Inténtelo nuevamente.");
             i--;
         }
     }
+
+    // costo total
     alert(`El costo total de los productos es: $${costoTotal.toFixed(2)}`);
+
+    console.log("Precios individuales:", producto.precios);
 }
 
-calcularCostoTotal();
+// boton
+const calcularButton = document.getElementById("calcularButton");
+
+calcularButton.addEventListener("click", calcularCostoTotal);
